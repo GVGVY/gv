@@ -41,18 +41,6 @@
     <div id="filter-container"
       class="max-h-0 opacity-0 overflow-hidden bg-white p-4 md:p-6 rounded-xl shadow-md mb-8 z-10">
       
-      <!-- 搜尋框 -->
-      <div class="mb-6">
-        <label for="search-box" class="text-xl font-semibold text-gray-700 mb-3 block flex items-center">
-          <ion-icon name="search-outline" class="text-2xl mr-2"></ion-icon>
-          快速搜尋：
-        </label>
-        <input type="text" id="search-box" placeholder="搜尋店名、類型或地區..." 
-          class="w-full p-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-
         <!-- 地區篩選 -->
         <div>
           <label for="location-filter" class="text-xl font-semibold text-gray-700 mb-3 block">地區篩選：</label>
@@ -65,30 +53,6 @@
             <option value="富良野">富良野</option>
             <option value="小樽">小樽</option>
             <option value="錢函">錢函</option>
-          </select>
-        </div>
-
-        <!-- 價格區間 -->
-        <div>
-          <label for="price-filter" class="text-xl font-semibold text-gray-700 mb-3 block">價格區間：</label>
-          <select id="price-filter"
-            class="w-full p-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
-            <option value="all">全部價格</option>
-            <option value="low">¥ 經濟實惠</option>
-            <option value="mid">¥¥ 中等價位</option>
-            <option value="high">¥¥¥ 高級餐廳</option>
-          </select>
-        </div>
-
-        <!-- 評分篩選 -->
-        <div>
-          <label for="rating-filter" class="text-xl font-semibold text-gray-700 mb-3 block">最低評分：</label>
-          <select id="rating-filter"
-            class="w-full p-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
-            <option value="0">不限</option>
-            <option value="3.5">Tabelog 3.5★ 以上</option>
-            <option value="3.6">Tabelog 3.6★ 以上</option>
-            <option value="3.7">Tabelog 3.7★ 以上</option>
           </select>
         </div>
 
