@@ -1,0 +1,158 @@
+<!-- eat.html (篩選器區塊修改版) -->
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>北海道精選美食 (300家完整版)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <style>
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    }
+    input[type="checkbox"]:checked {
+      background-color: #2563eb;
+      border-color: #2563eb;
+    }
+    #filter-container {
+      transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <div class="container mx-auto p-4 py-8 md:p-12 max-w-7xl">
+
+    <header class="text-center mb-6">
+      <h1 class="text-4xl font-bold text-gray-800 mb-2">北海道精選美食推薦</h1>
+      <p class="text-lg text-gray-600">札幌・旭川・美瑛・富良野・小樽・錢函 | 精選300家</p>
+    </header>
+
+    <div class="sticky top-4 z-20 mb-4 px-2 md:px-0">
+      <button id="toggle-filter-btn"
+        class="w-full bg-blue-600 text-white p-3 rounded-lg shadow-lg font-semibold flex items-center justify-center space-x-2 text-lg hover:bg-blue-700 transition-colors">
+        <ion-icon name="options-outline"></ion-icon>
+        <span>顯示篩選器 (Click)</span>
+      </button>
+    </div>
+
+    <div id="filter-container"
+      class="max-h-0 opacity-0 overflow-hidden bg-white p-4 md:p-6 rounded-xl shadow-md mb-8 z-10">
+      
+      <!-- 搜尋框 -->
+      <div class="mb-6">
+        <label for="search-box" class="text-xl font-semibold text-gray-700 mb-3 block flex items-center">
+          <ion-icon name="search-outline" class="text-2xl mr-2"></ion-icon>
+          快速搜尋：
+        </label>
+        <input type="text" id="search-box" placeholder="搜尋店名、類型或地區..." 
+          class="w-full p-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+        <!-- 地區篩選 -->
+        <div>
+          <label for="location-filter" class="text-xl font-semibold text-gray-700 mb-3 block">地區篩選：</label>
+          <select id="location-filter"
+            class="w-full p-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
+            <option value="all">全部地區</option>
+            <option value="札幌">札幌</option>
+            <option value="旭川">旭川</option>
+            <option value="美瑛">美瑛</option>
+            <option value="富良野">富良野</option>
+            <option value="小樽">小樽</option>
+            <option value="錢函">錢函</option>
+          </select>
+        </div>
+
+        <!-- 價格區間 -->
+        <div>
+          <label for="price-filter" class="text-xl font-semibold text-gray-700 mb-3 block">價格區間：</label>
+          <select id="price-filter"
+            class="w-full p-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
+            <option value="all">全部價格</option>
+            <option value="low">¥ 經濟實惠</option>
+            <option value="mid">¥¥ 中等價位</option>
+            <option value="high">¥¥¥ 高級餐廳</option>
+          </select>
+        </div>
+
+        <!-- 評分篩選 -->
+        <div>
+          <label for="rating-filter" class="text-xl font-semibold text-gray-700 mb-3 block">最低評分：</label>
+          <select id="rating-filter"
+            class="w-full p-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
+            <option value="0">不限</option>
+            <option value="3.5">Tabelog 3.5★ 以上</option>
+            <option value="3.6">Tabelog 3.6★ 以上</option>
+            <option value="3.7">Tabelog 3.7★ 以上</option>
+          </select>
+        </div>
+
+        <!-- 營業狀態 -->
+        <div>
+          <label for="open-status-filter" class="text-xl font-semibold text-gray-700 mb-3 block">營業狀態：</label>
+          <select id="open-status-filter"
+            class="w-full p-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
+            <option value="all">全部餐廳</option>
+            <option value="open">現在營業中</option>
+          </select>
+        </div>
+
+        <!-- 美食類型 -->
+        <div class="md:col-span-3">
+          <label class="text-xl font-semibold text-gray-700 mb-3 block">美食類型：</label>
+          <div id="category-filters-food" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3"></div>
+          <div class="mt-4 flex space-x-3">
+            <button id="select-all-food-btn"
+              class="px-4 py-2 bg-blue-500 text-white text-sm font-semibold rounded-lg hover:bg-blue-600 transition-colors">
+              全選
+            </button>
+            <button id="clear-all-food-btn"
+              class="px-4 py-2 bg-gray-500 text-white text-sm font-semibold rounded-lg hover:bg-gray-600 transition-colors">
+              全清
+            </button>
+          </div>
+        </div>
+
+        <!-- 排序方式 -->
+        <div>
+          <label for="sort-select" class="text-xl font-semibold text-gray-700 mb-3 block">排序方式：</label>
+          <select id="sort-select"
+            class="w-full p-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
+            <option value="tabelogScoreDesc">Tabelog 評分（高→低）</option>
+            <option value="tabelogReviewsDesc">Tabelog 評論數（多→少）</option>
+            <option value="googleScoreDesc">Google 評分（高→低）</option>
+            <option value="googleReviewsDesc">Google 評論數（多→少）</option>
+            <option value="nameAsc">店名（A→Z）</option>
+          </select>
+        </div>
+      </div>
+
+      <button id="close-filter-btn"
+        class="mt-6 w-full bg-gray-200 text-gray-700 p-2 rounded-lg font-semibold hover:bg-gray-300 md:hidden">
+        關閉篩選器
+      </button>
+    </div>
+
+    <!-- 結果數量顯示 -->
+    <div id="result-count" class="text-center mb-4 text-lg text-gray-700 font-semibold"></div>
+
+    <main id="restaurant-list"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+    </main>
+
+    <div id="no-results"
+      class="hidden text-center col-span-1 md:col-span-2 lg:col-span-3 py-16">
+      <p class="text-2xl font-semibold text-gray-600">（；・д・）</p>
+      <p class="text-xl text-gray-500 mt-4">找不到符合條件的餐廳</p>
+      <p class="text-gray-400 mt-2">請試著放寬您的篩選條件</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
