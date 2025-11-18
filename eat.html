@@ -1,138 +1,251 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>北海道精選美食 (300家完整版)</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-  <style>
-    body {
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-    }
-    input[type="checkbox"]:checked {
-      background-color: #2563eb;
-      border-color: #2563eb;
-    }
-    #filter-container {
-      transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
-    }
-  </style>
-</head>
-<body class="bg-gray-100 min-h-screen">
-  <div class="container mx-auto p-3 py-6 md:p-12 max-w-7xl">
+import React, { useState, useRef } from 'react';
+import { ExternalLink, Calendar, Store, ChevronRight, AlertCircle, RefreshCw, Smartphone, MapPin, Navigation, ArrowLeft } from 'lucide-react';
 
-    <header class="text-center mb-4 md:mb-6">
-      <h1 class="text-2xl md:text-4xl font-bold text-gray-800 mb-1 md:mb-2">北海道精選美食推薦</h1>
-      <p class="text-sm md:text-lg text-gray-600">札幌・旭川・美瑛・富良野・小樽・錢函 | 精選300家</p>
-    </header>
+// 定義資料來源
+const GIRLS_DATA = [
+  {
+    id: 1,
+    name: "新垣いちる",
+    shop: "Soap-Q (Hokkaido)",
+    url: "https://soap-q.hokkaido-susukino.net/top/girls/girldetail/?girl_id=29622850",
+    type: "soap-q"
+  },
+  {
+    id: 2,
+    name: "りか",
+    shop: "Soap-Q (Hokkaido)",
+    url: "https://soap-q.hokkaido-susukino.net/top/girls/girldetail/?girl_id=30454705",
+    type: "soap-q"
+  },
+  {
+    id: 3,
+    name: "AYAKA",
+    shop: "Pure Lovers (Shop 14208)",
+    url: "https://purelovers-escort.com/zh-hant/shop/14208/girl/4280092/",
+    type: "purelovers"
+  },
+  {
+    id: 4,
+    name: "CHIAKI",
+    shop: "Pure Lovers (Shop 14208)",
+    url: "https://purelovers-escort.com/zh-hant/shop/14208/girl/2889379/",
+    type: "purelovers"
+  },
+  {
+    id: 5,
+    name: "Eimi",
+    shop: "Pure Lovers (Shop 18040)",
+    url: "https://purelovers-escort.com/zh-hant/shop/18040/girl/5026394/",
+    type: "purelovers"
+  },
+  {
+    id: 6,
+    name: "kazuha",
+    shop: "Pure Lovers (Shop 18040)",
+    url: "https://purelovers-escort.com/zh-hant/shop/18040/girl/4133996/",
+    type: "purelovers"
+  },
+  {
+    id: 7,
+    name: "Ito",
+    shop: "Pure Lovers (Shop 18040)",
+    url: "https://purelovers-escort.com/zh-hant/shop/18040/girl/4377006/",
+    type: "purelovers"
+  }
+];
 
-    <!-- 篩選器按鈕 -->
-    <div class="sticky top-2 md:top-4 z-20 mb-3 md:mb-4">
-      <button id="toggle-filter-btn"
-        class="w-full bg-blue-600 text-white p-2.5 md:p-3 rounded-lg shadow-lg font-semibold flex items-center justify-center space-x-2 text-base md:text-lg hover:bg-blue-700 transition-colors">
-        <ion-icon name="options-outline" class="text-xl"></ion-icon>
-        <span>顯示篩選器</span>
-      </button>
-    </div>
+// 定義地圖連結資料
+const MAP_LINKS = [
+  {
+    name: "salon de M (サロンドエム)",
+    url: "https://maps.app.goo.gl/PAppCK4vE2V1zyXG7",
+    address: "札幌市薄野周邊"
+  },
+  {
+    name: "Soapland FANTASY Spa",
+    url: "https://maps.app.goo.gl/MYxKknLTHNFYfMJPA",
+    address: "札幌市薄野周邊"
+  },
+  {
+    name: "Happiness Sapporo (ハピネス札幌)",
+    url: "https://maps.app.goo.gl/2YBzy1wGrG3Nit1G6",
+    address: "札幌市薄野周邊"
+  }
+];
 
-    <!-- 篩選器容器 -->
-    <div id="filter-container"
-      class="max-h-0 opacity-0 overflow-hidden bg-white p-3 md:p-6 rounded-xl shadow-md mb-4 md:mb-8 z-10">
+export default function App() {
+  const [selectedGirl, setSelectedGirl] = useState(null);
+  const [viewMode, setViewMode] = useState('list'); // 'list' or 'preview'
+  const iframeRef = useRef(null);
+
+  // 處理點擊事件
+  const handleGirlClick = (girl) => {
+    setSelectedGirl(girl);
+    setViewMode('preview');
+  };
+
+  const closePreview = () => {
+    setViewMode('list');
+    setSelectedGirl(null);
+  };
+
+  const refreshIframe = () => {
+    if (iframeRef.current) {
+      iframeRef.current.src = iframeRef.current.src;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 pb-safe">
       
-      <!-- Grid 容器 - 手機單欄，平板/桌面雙欄 -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-
-        <!-- 地區篩選 -->
-        <div>
-          <label for="location-filter" class="text-base md:text-xl font-semibold text-gray-700 mb-2 md:mb-3 block">
-            📍 地區篩選
-          </label>
-          <select id="location-filter"
-            class="w-full p-2.5 md:p-3 text-sm md:text-base rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
-            <option value="all">全部地區</option>
-            <option value="札幌">札幌</option>
-            <option value="旭川">旭川</option>
-            <option value="美瑛">美瑛</option>
-            <option value="富良野">富良野</option>
-            <option value="小樽">小樽</option>
-            <option value="錢函">錢函</option>
-          </select>
-        </div>
-
-        <!-- 營業狀態 -->
-        <div>
-          <label for="open-status-filter" class="text-base md:text-xl font-semibold text-gray-700 mb-2 md:mb-3 block">
-            🕒 營業狀態
-          </label>
-          <select id="open-status-filter"
-            class="w-full p-2.5 md:p-3 text-sm md:text-base rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
-            <option value="all">全部餐廳</option>
-            <option value="open">現在營業中</option>
-          </select>
-        </div>
-
-        <!-- 排序方式 -->
-        <div class="md:col-span-2">
-          <label for="sort-select" class="text-base md:text-xl font-semibold text-gray-700 mb-2 md:mb-3 block">
-            🔽 排序方式
-          </label>
-          <select id="sort-select"
-            class="w-full p-2.5 md:p-3 text-sm md:text-base rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors">
-            <option value="tabelogScoreDesc">Tabelog 評分（高→低）</option>
-            <option value="tabelogReviewsDesc">Tabelog 評論數（多→少）</option>
-            <option value="googleScoreDesc">Google 評分（高→低）</option>
-            <option value="googleReviewsDesc">Google 評論數（多→少）</option>
-            <option value="nameAsc">店名（A→Z）</option>
-          </select>
-        </div>
-
-        <!-- 美食類型 -->
-        <div class="md:col-span-2">
-          <label class="text-base md:text-xl font-semibold text-gray-700 mb-2 md:mb-3 block">
-            🍜 美食類型
-          </label>
-          <div id="category-filters-food" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-3"></div>
-          <div class="mt-3 md:mt-4 flex space-x-2 md:space-x-3">
-            <button id="select-all-food-btn"
-              class="flex-1 md:flex-none px-3 md:px-4 py-1.5 md:py-2 bg-blue-500 text-white text-xs md:text-sm font-semibold rounded-lg hover:bg-blue-600 transition-colors">
-              全選
-            </button>
-            <button id="clear-all-food-btn"
-              class="flex-1 md:flex-none px-3 md:px-4 py-1.5 md:py-2 bg-gray-500 text-white text-xs md:text-sm font-semibold rounded-lg hover:bg-gray-600 transition-colors">
-              全清
+      {/* 只有在預覽模式才顯示頂部導航列，增加列表模式的可視空間 */}
+      {viewMode === 'preview' && (
+        <header className="bg-white shadow-sm sticky top-0 z-20 border-b border-slate-200">
+          <div className="max-w-4xl mx-auto px-4 py-3 flex items-center">
+            <button 
+              onClick={closePreview}
+              className="flex items-center gap-1 text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-full transition-colors active:scale-95"
+            >
+              <ArrowLeft size={16} />
+              回列表
             </button>
           </div>
-        </div>
+        </header>
+      )}
 
-      </div>
+      <main className="max-w-4xl mx-auto p-4 md:p-6">
+        
+        {/* 預覽模式 (內嵌 iframe) */}
+        {viewMode === 'preview' && selectedGirl ? (
+          <div className="flex flex-col h-[80vh] bg-white rounded-xl shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-200 border border-slate-200">
+            {/* 預覽視窗的控制列 */}
+            <div className="bg-slate-800 text-white p-3 flex flex-wrap gap-2 justify-between items-center shadow-md z-10">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className={`w-2 h-2 rounded-full flex-shrink-0 ${selectedGirl.type === 'soap-q' ? 'bg-purple-400' : 'bg-rose-400'}`}></div>
+                <span className="font-bold text-lg truncate">{selectedGirl.name}</span>
+              </div>
+              
+              <div className="flex gap-2">
+                <button 
+                  onClick={refreshIframe}
+                  className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-200 transition-colors"
+                  title="重新整理預覽"
+                >
+                  <RefreshCw size={18} />
+                </button>
+                <button 
+                  onClick={() => window.open(selectedGirl.url, '_blank')}
+                  className="flex items-center gap-1 bg-rose-600 hover:bg-rose-700 px-4 py-1.5 rounded-lg text-sm font-bold shadow-sm transition-all active:scale-95"
+                >
+                  <ExternalLink size={16} />
+                  <span className="hidden sm:inline">跳轉開啟</span>
+                  <span className="sm:hidden">開啟</span>
+                </button>
+              </div>
+            </div>
+            
+            <div className="flex-1 relative bg-slate-100 w-full">
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-400 p-8 text-center z-0 pointer-events-none">
+                <div className="animate-pulse mb-4">
+                   <Store className="w-12 h-12 opacity-20" />
+                </div>
+                <p className="font-medium text-slate-500">正在載入 {selectedGirl.shop} 的頁面...</p>
+                <p className="text-xs mt-2 text-slate-400 max-w-xs leading-relaxed">
+                  如果畫面是空白或顯示拒絕連線，<br/>
+                  請點擊右上角的紅色按鈕。
+                </p>
+              </div>
+              <iframe 
+                ref={iframeRef}
+                src={selectedGirl.url} 
+                className="w-full h-full relative z-10 border-none bg-white"
+                title="Schedule Preview"
+                sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+              />
+            </div>
+          </div>
+        ) : (
+          /* 列表模式 */
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {GIRLS_DATA.map((girl) => (
+                <div 
+                  key={girl.id}
+                  className="bg-white p-4 rounded-xl shadow-sm border border-slate-200 hover:shadow-md hover:border-rose-300 transition-all group cursor-pointer active:scale-[0.98]"
+                  onClick={() => handleGirlClick(girl)}
+                >
+                  <div className="flex justify-between items-start">
+                    <div className="flex gap-4 items-center">
+                      <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-sm border-2 border-white
+                        ${girl.type === 'soap-q' ? 'bg-gradient-to-br from-purple-400 to-purple-600' : 'bg-gradient-to-br from-pink-400 to-rose-500'}
+                      `}>
+                        {girl.name.substring(0, 1)}
+                      </div>
+                      
+                      <div>
+                        <h2 className="font-bold text-lg text-slate-800 group-hover:text-rose-600 transition-colors">
+                          {girl.name}
+                        </h2>
+                        <div className="flex items-center gap-1.5 text-slate-500 text-xs font-medium bg-slate-100 px-2 py-1 rounded-full w-fit mt-1">
+                          <Store size={10} />
+                          <span className="truncate max-w-[140px]">{girl.shop}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <ChevronRight size={20} className="text-slate-300 group-hover:text-rose-500 mt-2" />
+                  </div>
+                  <div className="mt-4">
+                     <div className="w-full bg-slate-50 hover:bg-rose-50 text-slate-600 hover:text-rose-600 border border-slate-200 hover:border-rose-200 py-2.5 rounded-lg text-sm font-bold transition-colors flex items-center justify-center gap-2">
+                        <Calendar size={16} />
+                        查看出勤表
+                     </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* 底部提示 */}
+            <div className="mt-6 p-4 bg-slate-100 rounded-lg flex gap-3 items-start text-sm text-slate-500">
+               <Smartphone className="w-5 h-5 flex-shrink-0 mt-0.5 opacity-50" />
+               <div>
+                 <p>
+                   點擊卡片會開啟內嵌預覽。如果網站無法顯示，請使用預覽視窗右上角的「跳轉開啟」按鈕。
+                 </p>
+               </div>
+            </div>
 
-      <!-- 關閉按鈕 -->
-      <button id="close-filter-btn"
-        class="mt-4 md:mt-6 w-full bg-gray-200 text-gray-700 p-2 rounded-lg font-semibold hover:bg-gray-300 text-sm md:text-base">
-        關閉篩選器
-      </button>
+            {/* 地圖導航區塊 */}
+            <div className="mt-8 pt-6 border-t border-slate-200">
+              <h3 className="flex items-center gap-2 font-bold text-slate-700 mb-4">
+                <MapPin className="w-5 h-5 text-rose-500" />
+                店家地圖導航
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {MAP_LINKS.map((shop, index) => (
+                  <a 
+                    key={index}
+                    href={shop.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between bg-white p-4 rounded-lg border border-slate-200 hover:border-blue-400 hover:shadow-md transition-all group no-underline"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 group-hover:bg-blue-100 transition-colors">
+                        <Navigation size={20} />
+                      </div>
+                      <div>
+                        <p className="font-bold text-slate-800 group-hover:text-blue-600">{shop.name}</p>
+                        <p className="text-xs text-slate-400">{shop.address}</p>
+                      </div>
+                    </div>
+                    <ExternalLink size={16} className="text-slate-300 group-hover:text-blue-500" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+      </main>
     </div>
-
-    <!-- 結果數量顯示 -->
-    <div id="result-count" class="text-center mb-3 md:mb-4 text-base md:text-lg text-gray-700 font-semibold"></div>
-
-    <!-- 餐廳列表 -->
-    <main id="restaurant-list"
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
-    </main>
-
-    <!-- 無結果訊息 -->
-    <div id="no-results"
-      class="hidden text-center col-span-1 md:col-span-2 lg:col-span-3 py-12 md:py-16">
-      <p class="text-xl md:text-2xl font-semibold text-gray-600">（；・д・）</p>
-      <p class="text-lg md:text-xl text-gray-500 mt-3 md:mt-4">找不到符合條件的餐廳</p>
-      <p class="text-sm md:text-base text-gray-400 mt-2">請試著放寬您的篩選條件</p>
-    </div>
-  </div>
-
-  <script src="app.js"></script>
-</body>
-</html>
+  );
+}
