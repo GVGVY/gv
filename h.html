@@ -1,96 +1,102 @@
 <style>
-.table-nice {
-  border-collapse: separate;
-  border-spacing: 0;
-  width: 100%;
-  background: #f7fafc;
-  box-shadow: 0 2px 18px rgba(0,0,0,0.07);
-  border-radius: 12px;
-  overflow: hidden;
-  font-size: 16px;
-}
-.table-nice th {
-  background-color: #2787f5;
-  color: #fff;
-  font-weight: bold;
-  letter-spacing: 1px;
-  padding: 12px 8px;
-}
-.table-nice td {
+.mobile-list {
+  max-width: 500px;
+  margin: 24px auto;
   background: #fff;
-  padding: 14px 10px;
-  border-bottom: 1px solid #eaecef;
-  vertical-align: top;
+  border-radius: 16px;
+  box-shadow: 0 2px 18px rgba(0,0,0,0.09);
+  font-size: 16px;
+  padding:16px 10px;
 }
-.table-nice tr:last-child td {
+.shop-item {
+  border-bottom: 1px solid #f0f2f7;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+.shop-item:last-child {
   border-bottom: none;
+  margin-bottom:0;
+  padding-bottom:0;
 }
-.table-nice a {
-  color: #2787f5;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.2s;
+.shop-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #248bf2;
+  margin-bottom: 10px;
 }
-.table-nice a:hover {
-  color: #ff6f61;
-  text-decoration: underline;
+.fees-list {
+  margin: 0 0 7px 0;
+  padding:0;
+  list-style: none;
+  color:#333;
 }
-.table-nice td:first-child,
-.table-nice td:nth-child(2) {
+.fees-list li {
+  margin-bottom: 2px;
+}
+.shop-links {
+  margin-top: 4px;
+}
+.shop-links a {
+  display:inline-block;
+  margin-right:10px;
+  padding: 5px 11px;
+  background: #f3f7fc;
+  color: #248bf2;
   font-weight: 500;
+  border-radius: 16px;
+  text-decoration: none;
+  transition: background 0.15s;
 }
-.table-nice td:nth-child(3) {
-  color: #444;
+.shop-links a:hover {
+  background: #d6edfc;
+  color: #f26161;
+}
+.note {
+  color:#999;
+  font-size:14px;
+  margin-top:3px;
 }
 </style>
 
-<table class="table-nice">
-  <thead>
-    <tr>
-      <th>店名（日文）</th>
-      <th>店名（中文）</th>
-      <th>收費制度</th>
-      <th>出勤查詢</th>
-      <th>LINE聯絡</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>ソープランド ファンタジースパ</td>
-      <td>FANTASY Spa泡泡浴</td>
-      <td>
-        70分鐘：44,000日圓<br>
-        90分鐘：55,000日圓<br>
-        110分鐘：68,000日圓<br>
-        延長20分鐘：12,000日圓<br>
-        指名費用：2,000日圓
-      </td>
-      <td><a href="https://www.cityheaven.net/hokkaido/A0101/A010103/fantasispa/attend/" target="_blank">出勤查詢</a></td>
-      <td><a href="https://line.me/ti/p/GpYCQJr92B" target="_blank">LINE聯絡</a></td>
-    </tr>
-    <tr>
-      <td>ハピネス札幌</td>
-      <td>Happiness Sapporo</td>
-      <td>
-        60分鐘：30,000日圓<br>
-        75分鐘：38,000日圓<br>
-        90分鐘：46,000日圓<br>
-        指定費用：3,000日圓
-      </td>
-      <td><a href="https://fujoho.jp/index.php?p=shop_info&id=59887" target="_blank">出勤查詢</a></td>
-      <td><a href="https://lin.ee/qMmPn8x" target="_blank">LINE聯絡</a></td>
-    </tr>
-    <tr>
-      <td>サロンドエム</td>
-      <td>salon de M</td>
-      <td>
-        70分鐘：43,000日元<br>
-        90分鐘：55,000日元<br>
-        110分鐘：68,000日元<br>
-        *不能現場指定小姐，提前預約可能可指定
-      </td>
-      <td><a href="https://www.cityheaven.net/hokkaido/A0101/A010103/soap_q/attend/" target="_blank">出勤查詢</a></td>
-      <td><a href="https://line.me/ti/p/iSXPYiUL5j" target="_blank">LINE聯絡</a></td>
-    </tr>
-  </tbody>
-</table>
+<div class="mobile-list">
+  <div class="shop-item">
+    <div class="shop-title">ソープランド ファンタジースパ FANTASY Spa泡泡浴</div>
+    <ul class="fees-list">
+      <li>70分鐘：44,000日圓</li>
+      <li>90分鐘：55,000日圓</li>
+      <li>110分鐘：68,000日圓</li>
+      <li>延長20分鐘：12,000日圓</li>
+      <li>指名費用：2,000日圓</li>
+    </ul>
+    <div class="shop-links">
+      <a href="https://www.cityheaven.net/hokkaido/A0101/A010103/fantasispa/attend/" target="_blank">出勤查詢</a>
+      <a href="https://line.me/ti/p/GpYCQJr92B" target="_blank">LINE聯絡</a>
+    </div>
+  </div>
+  <div class="shop-item">
+    <div class="shop-title">ハピネス札幌 Happiness Sapporo</div>
+    <ul class="fees-list">
+      <li>60分鐘：30,000日圓</li>
+      <li>75分鐘：38,000日圓</li>
+      <li>90分鐘：46,000日圓</li>
+      <li>指定費用：3,000日圓</li>
+    </ul>
+    <div class="shop-links">
+      <a href="https://fujoho.jp/index.php?p=shop_info&id=59887" target="_blank">出勤查詢</a>
+      <a href="https://lin.ee/qMmPn8x" target="_blank">LINE聯絡</a>
+    </div>
+  </div>
+  <div class="shop-item">
+    <div class="shop-title">サロンドエム salon de M</div>
+    <ul class="fees-list">
+      <li>70分鐘：43,000日元</li>
+      <li>90分鐘：55,000日元</li>
+      <li>110分鐘：68,000日元</li>
+    </ul>
+    <div class="note">*不能現場指定小姐，提前預約可能可指定</div>
+    <div class="shop-links">
+      <a href="https://www.cityheaven.net/hokkaido/A0101/A010103/soap_q/attend/" target="_blank">出勤查詢</a>
+      <a href="https://line.me/ti/p/iSXPYiUL5j" target="_blank">LINE聯絡</a>
+    </div>
+  </div>
+</div>
