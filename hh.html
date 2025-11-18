@@ -1,251 +1,293 @@
-import React, { useState, useRef } from 'react';
-import { ExternalLink, Calendar, Store, ChevronRight, AlertCircle, RefreshCw, Smartphone, MapPin, Navigation, ArrowLeft } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出勤查詢儀表板</title>
+    <!-- 引入 Tailwind CSS 進行排版 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 額外的自定義樣式 */
+        body { font-family: system-ui, -apple-system, sans-serif; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        /* 隱藏捲軸但保留功能 */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 pb-safe min-h-screen">
 
-// 定義資料來源
-const GIRLS_DATA = [
-  {
-    id: 1,
-    name: "新垣いちる",
-    shop: "Soap-Q (Hokkaido)",
-    url: "https://soap-q.hokkaido-susukino.net/top/girls/girldetail/?girl_id=29622850",
-    type: "soap-q"
-  },
-  {
-    id: 2,
-    name: "りか",
-    shop: "Soap-Q (Hokkaido)",
-    url: "https://soap-q.hokkaido-susukino.net/top/girls/girldetail/?girl_id=30454705",
-    type: "soap-q"
-  },
-  {
-    id: 3,
-    name: "AYAKA",
-    shop: "Pure Lovers (Shop 14208)",
-    url: "https://purelovers-escort.com/zh-hant/shop/14208/girl/4280092/",
-    type: "purelovers"
-  },
-  {
-    id: 4,
-    name: "CHIAKI",
-    shop: "Pure Lovers (Shop 14208)",
-    url: "https://purelovers-escort.com/zh-hant/shop/14208/girl/2889379/",
-    type: "purelovers"
-  },
-  {
-    id: 5,
-    name: "Eimi",
-    shop: "Pure Lovers (Shop 18040)",
-    url: "https://purelovers-escort.com/zh-hant/shop/18040/girl/5026394/",
-    type: "purelovers"
-  },
-  {
-    id: 6,
-    name: "kazuha",
-    shop: "Pure Lovers (Shop 18040)",
-    url: "https://purelovers-escort.com/zh-hant/shop/18040/girl/4133996/",
-    type: "purelovers"
-  },
-  {
-    id: 7,
-    name: "Ito",
-    shop: "Pure Lovers (Shop 18040)",
-    url: "https://purelovers-escort.com/zh-hant/shop/18040/girl/4377006/",
-    type: "purelovers"
-  }
-];
-
-// 定義地圖連結資料
-const MAP_LINKS = [
-  {
-    name: "salon de M (サロンドエム)",
-    url: "https://maps.app.goo.gl/PAppCK4vE2V1zyXG7",
-    address: "札幌市薄野周邊"
-  },
-  {
-    name: "Soapland FANTASY Spa",
-    url: "https://maps.app.goo.gl/MYxKknLTHNFYfMJPA",
-    address: "札幌市薄野周邊"
-  },
-  {
-    name: "Happiness Sapporo (ハピネス札幌)",
-    url: "https://maps.app.goo.gl/2YBzy1wGrG3Nit1G6",
-    address: "札幌市薄野周邊"
-  }
-];
-
-export default function App() {
-  const [selectedGirl, setSelectedGirl] = useState(null);
-  const [viewMode, setViewMode] = useState('list'); // 'list' or 'preview'
-  const iframeRef = useRef(null);
-
-  // 處理點擊事件
-  const handleGirlClick = (girl) => {
-    setSelectedGirl(girl);
-    setViewMode('preview');
-  };
-
-  const closePreview = () => {
-    setViewMode('list');
-    setSelectedGirl(null);
-  };
-
-  const refreshIframe = () => {
-    if (iframeRef.current) {
-      iframeRef.current.src = iframeRef.current.src;
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 pb-safe">
-      
-      {/* 只有在預覽模式才顯示頂部導航列，增加列表模式的可視空間 */}
-      {viewMode === 'preview' && (
-        <header className="bg-white shadow-sm sticky top-0 z-20 border-b border-slate-200">
-          <div className="max-w-4xl mx-auto px-4 py-3 flex items-center">
-            <button 
-              onClick={closePreview}
-              className="flex items-center gap-1 text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-full transition-colors active:scale-95"
-            >
-              <ArrowLeft size={16} />
-              回列表
+    <!-- 頂部導航列 (預設隱藏，預覽模式才顯示) -->
+    <header id="preview-header" class="bg-white shadow-sm sticky top-0 z-20 border-b border-slate-200 hidden">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex items-center">
+            <button onclick="closePreview()" class="flex items-center gap-1 text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-full transition-colors active:scale-95">
+                <!-- ArrowLeft Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+                回列表
             </button>
-          </div>
-        </header>
-      )}
+        </div>
+    </header>
 
-      <main className="max-w-4xl mx-auto p-4 md:p-6">
+    <main class="max-w-4xl mx-auto p-4 md:p-6">
         
-        {/* 預覽模式 (內嵌 iframe) */}
-        {viewMode === 'preview' && selectedGirl ? (
-          <div className="flex flex-col h-[80vh] bg-white rounded-xl shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-200 border border-slate-200">
-            {/* 預覽視窗的控制列 */}
-            <div className="bg-slate-800 text-white p-3 flex flex-wrap gap-2 justify-between items-center shadow-md z-10">
-              <div className="flex items-center gap-2 min-w-0">
-                <div className={`w-2 h-2 rounded-full flex-shrink-0 ${selectedGirl.type === 'soap-q' ? 'bg-purple-400' : 'bg-rose-400'}`}></div>
-                <span className="font-bold text-lg truncate">{selectedGirl.name}</span>
-              </div>
-              
-              <div className="flex gap-2">
-                <button 
-                  onClick={refreshIframe}
-                  className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-200 transition-colors"
-                  title="重新整理預覽"
-                >
-                  <RefreshCw size={18} />
-                </button>
-                <button 
-                  onClick={() => window.open(selectedGirl.url, '_blank')}
-                  className="flex items-center gap-1 bg-rose-600 hover:bg-rose-700 px-4 py-1.5 rounded-lg text-sm font-bold shadow-sm transition-all active:scale-95"
-                >
-                  <ExternalLink size={16} />
-                  <span className="hidden sm:inline">跳轉開啟</span>
-                  <span className="sm:hidden">開啟</span>
-                </button>
-              </div>
-            </div>
-            
-            <div className="flex-1 relative bg-slate-100 w-full">
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-400 p-8 text-center z-0 pointer-events-none">
-                <div className="animate-pulse mb-4">
-                   <Store className="w-12 h-12 opacity-20" />
-                </div>
-                <p className="font-medium text-slate-500">正在載入 {selectedGirl.shop} 的頁面...</p>
-                <p className="text-xs mt-2 text-slate-400 max-w-xs leading-relaxed">
-                  如果畫面是空白或顯示拒絕連線，<br/>
-                  請點擊右上角的紅色按鈕。
-                </p>
-              </div>
-              <iframe 
-                ref={iframeRef}
-                src={selectedGirl.url} 
-                className="w-full h-full relative z-10 border-none bg-white"
-                title="Schedule Preview"
-                sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-              />
-            </div>
-          </div>
-        ) : (
-          /* 列表模式 */
-          <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {GIRLS_DATA.map((girl) => (
-                <div 
-                  key={girl.id}
-                  className="bg-white p-4 rounded-xl shadow-sm border border-slate-200 hover:shadow-md hover:border-rose-300 transition-all group cursor-pointer active:scale-[0.98]"
-                  onClick={() => handleGirlClick(girl)}
-                >
-                  <div className="flex justify-between items-start">
-                    <div className="flex gap-4 items-center">
-                      <div className={`w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-sm border-2 border-white
-                        ${girl.type === 'soap-q' ? 'bg-gradient-to-br from-purple-400 to-purple-600' : 'bg-gradient-to-br from-pink-400 to-rose-500'}
-                      `}>
-                        {girl.name.substring(0, 1)}
-                      </div>
-                      
-                      <div>
-                        <h2 className="font-bold text-lg text-slate-800 group-hover:text-rose-600 transition-colors">
-                          {girl.name}
-                        </h2>
-                        <div className="flex items-center gap-1.5 text-slate-500 text-xs font-medium bg-slate-100 px-2 py-1 rounded-full w-fit mt-1">
-                          <Store size={10} />
-                          <span className="truncate max-w-[140px]">{girl.shop}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <ChevronRight size={20} className="text-slate-300 group-hover:text-rose-500 mt-2" />
-                  </div>
-                  <div className="mt-4">
-                     <div className="w-full bg-slate-50 hover:bg-rose-50 text-slate-600 hover:text-rose-600 border border-slate-200 hover:border-rose-200 py-2.5 rounded-lg text-sm font-bold transition-colors flex items-center justify-center gap-2">
-                        <Calendar size={16} />
-                        查看出勤表
-                     </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            {/* 底部提示 */}
-            <div className="mt-6 p-4 bg-slate-100 rounded-lg flex gap-3 items-start text-sm text-slate-500">
-               <Smartphone className="w-5 h-5 flex-shrink-0 mt-0.5 opacity-50" />
-               <div>
-                 <p>
-                   點擊卡片會開啟內嵌預覽。如果網站無法顯示，請使用預覽視窗右上角的「跳轉開啟」按鈕。
-                 </p>
-               </div>
+        <!-- 列表模式視圖 -->
+        <div id="list-view">
+            <!-- 女生列表容器 -->
+            <div id="girls-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- JS 會自動填入內容 -->
             </div>
 
-            {/* 地圖導航區塊 */}
-            <div className="mt-8 pt-6 border-t border-slate-200">
-              <h3 className="flex items-center gap-2 font-bold text-slate-700 mb-4">
-                <MapPin className="w-5 h-5 text-rose-500" />
-                店家地圖導航
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {MAP_LINKS.map((shop, index) => (
-                  <a 
-                    key={index}
-                    href={shop.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between bg-white p-4 rounded-lg border border-slate-200 hover:border-blue-400 hover:shadow-md transition-all group no-underline"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 group-hover:bg-blue-100 transition-colors">
-                        <Navigation size={20} />
-                      </div>
-                      <div>
-                        <p className="font-bold text-slate-800 group-hover:text-blue-600">{shop.name}</p>
-                        <p className="text-xs text-slate-400">{shop.address}</p>
-                      </div>
-                    </div>
-                    <ExternalLink size={16} className="text-slate-300 group-hover:text-blue-500" />
-                  </a>
-                ))}
-              </div>
+            <!-- 手機提示 -->
+            <div class="mt-6 p-4 bg-slate-100 rounded-lg flex gap-3 items-start text-sm text-slate-500">
+                <!-- Smartphone Icon -->
+                <svg class="w-5 h-5 flex-shrink-0 mt-0.5 opacity-50" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+                <div>
+                    <p>點擊卡片會開啟內嵌預覽。如果網站無法顯示，請使用預覽視窗右上角的「跳轉開啟」按鈕。</p>
+                </div>
             </div>
-          </>
-        )}
-      </main>
-    </div>
-  );
-}
+
+            <!-- 地圖導航區塊 -->
+            <div class="mt-8 pt-6 border-t border-slate-200">
+                <h3 class="flex items-center gap-2 font-bold text-slate-700 mb-4">
+                    <!-- MapPin Icon -->
+                    <svg class="w-5 h-5 text-rose-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    店家地圖導航
+                </h3>
+                <div id="maps-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <!-- JS 會自動填入內容 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 預覽模式視圖 (預設隱藏) -->
+        <div id="preview-view" class="hidden flex flex-col h-[80vh] bg-white rounded-xl shadow-xl overflow-hidden border border-slate-200">
+            <!-- 控制列 -->
+            <div class="bg-slate-800 text-white p-3 flex flex-wrap gap-2 justify-between items-center shadow-md z-10">
+                <div class="flex items-center gap-2 min-w-0">
+                    <div id="preview-status-dot" class="w-2 h-2 rounded-full flex-shrink-0 bg-rose-400"></div>
+                    <span id="preview-name" class="font-bold text-lg truncate">Name</span>
+                </div>
+                
+                <div class="flex gap-2">
+                    <button onclick="refreshIframe()" class="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-200 transition-colors" title="重新整理預覽">
+                        <!-- RefreshCw Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+                    </button>
+                    <a id="preview-external-link" href="#" target="_blank" class="flex items-center gap-1 bg-rose-600 hover:bg-rose-700 px-4 py-1.5 rounded-lg text-sm font-bold shadow-sm transition-all active:scale-95 no-underline text-white">
+                        <!-- ExternalLink Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        <span class="hidden sm:inline">跳轉開啟</span>
+                        <span class="sm:hidden">開啟</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Iframe 容器 -->
+            <div class="flex-1 relative bg-slate-100 w-full">
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 p-8 text-center z-0 pointer-events-none">
+                    <div class="animate-pulse mb-4">
+                        <!-- Store Icon -->
+                        <svg class="w-12 h-12 opacity-20" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2v0a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12v0a2 2 0 0 1-2-2V7"/></svg>
+                    </div>
+                    <p class="font-medium text-slate-500">正在載入 <span id="preview-shop-name"></span> 的頁面...</p>
+                    <p class="text-xs mt-2 text-slate-400 max-w-xs leading-relaxed">
+                        如果畫面是空白或顯示拒絕連線，<br/>
+                        請點擊右上角的紅色按鈕。
+                    </p>
+                </div>
+                <iframe 
+                    id="main-iframe"
+                    src="" 
+                    class="w-full h-full relative z-10 border-none bg-white"
+                    title="Schedule Preview"
+                    sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+                ></iframe>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // --- 資料設定 ---
+        const GIRLS_DATA = [
+            {
+                id: 1,
+                name: "新垣いちる",
+                shop: "Soap-Q (Hokkaido)",
+                url: "https://soap-q.hokkaido-susukino.net/top/girls/girldetail/?girl_id=29622850",
+                type: "soap-q"
+            },
+            {
+                id: 2,
+                name: "りか",
+                shop: "Soap-Q (Hokkaido)",
+                url: "https://soap-q.hokkaido-susukino.net/top/girls/girldetail/?girl_id=30454705",
+                type: "soap-q"
+            },
+            {
+                id: 3,
+                name: "AYAKA",
+                shop: "Pure Lovers (Shop 14208)",
+                url: "https://purelovers-escort.com/zh-hant/shop/14208/girl/4280092/",
+                type: "purelovers"
+            },
+            {
+                id: 4,
+                name: "CHIAKI",
+                shop: "Pure Lovers (Shop 14208)",
+                url: "https://purelovers-escort.com/zh-hant/shop/14208/girl/2889379/",
+                type: "purelovers"
+            },
+            {
+                id: 5,
+                name: "Eimi",
+                shop: "Pure Lovers (Shop 18040)",
+                url: "https://purelovers-escort.com/zh-hant/shop/18040/girl/5026394/",
+                type: "purelovers"
+            },
+            {
+                id: 6,
+                name: "kazuha",
+                shop: "Pure Lovers (Shop 18040)",
+                url: "https://purelovers-escort.com/zh-hant/shop/18040/girl/4133996/",
+                type: "purelovers"
+            },
+            {
+                id: 7,
+                name: "Ito",
+                shop: "Pure Lovers (Shop 18040)",
+                url: "https://purelovers-escort.com/zh-hant/shop/18040/girl/4377006/",
+                type: "purelovers"
+            }
+        ];
+
+        const MAP_LINKS = [
+            {
+                name: "salon de M (サロンドエム)",
+                url: "https://maps.app.goo.gl/PAppCK4vE2V1zyXG7",
+                address: "札幌市薄野周邊"
+            },
+            {
+                name: "Soapland FANTASY Spa",
+                url: "https://maps.app.goo.gl/MYxKknLTHNFYfMJPA",
+                address: "札幌市薄野周邊"
+            },
+            {
+                name: "Happiness Sapporo (ハピネス札幌)",
+                url: "https://maps.app.goo.gl/2YBzy1wGrG3Nit1G6",
+                address: "札幌市薄野周邊"
+            }
+        ];
+
+        // --- 程式邏輯 ---
+        
+        // 初始化
+        window.onload = function() {
+            renderGirlsList();
+            renderMapLinks();
+        };
+
+        function renderGirlsList() {
+            const container = document.getElementById('girls-grid');
+            let html = '';
+
+            GIRLS_DATA.forEach(girl => {
+                const colorClass = girl.type === 'soap-q' ? 'bg-gradient-to-br from-purple-400 to-purple-600' : 'bg-gradient-to-br from-pink-400 to-rose-500';
+                
+                html += `
+                <div onclick="openPreview(${girl.id})" class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 hover:shadow-md hover:border-rose-300 transition-all group cursor-pointer active:scale-[0.98]">
+                    <div class="flex justify-between items-start">
+                        <div class="flex gap-4 items-center">
+                            <div class="w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-sm border-2 border-white ${colorClass}">
+                                ${girl.name.substring(0, 1)}
+                            </div>
+                            <div>
+                                <h2 class="font-bold text-lg text-slate-800 group-hover:text-rose-600 transition-colors">
+                                    ${girl.name}
+                                </h2>
+                                <div class="flex items-center gap-1.5 text-slate-500 text-xs font-medium bg-slate-100 px-2 py-1 rounded-full w-fit mt-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2v0a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12v0a2 2 0 0 1-2-2V7"/></svg>
+                                    <span class="truncate max-w-[140px]">${girl.shop}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <svg class="text-slate-300 group-hover:text-rose-500 mt-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </div>
+                    <div class="mt-4">
+                        <div class="w-full bg-slate-50 hover:bg-rose-50 text-slate-600 hover:text-rose-600 border border-slate-200 hover:border-rose-200 py-2.5 rounded-lg text-sm font-bold transition-colors flex items-center justify-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                            查看出勤表
+                        </div>
+                    </div>
+                </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function renderMapLinks() {
+            const container = document.getElementById('maps-grid');
+            let html = '';
+            MAP_LINKS.forEach(shop => {
+                html += `
+                <a href="${shop.url}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-white p-4 rounded-lg border border-slate-200 hover:border-blue-400 hover:shadow-md transition-all group no-underline">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 group-hover:bg-blue-100 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                        </div>
+                        <div>
+                            <p class="font-bold text-slate-800 group-hover:text-blue-600">${shop.name}</p>
+                            <p class="text-xs text-slate-400">${shop.address}</p>
+                        </div>
+                    </div>
+                    <svg class="text-slate-300 group-hover:text-blue-500" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // 切換到預覽模式
+        function openPreview(girlId) {
+            const girl = GIRLS_DATA.find(g => g.id === girlId);
+            if (!girl) return;
+
+            // UI 切換
+            document.getElementById('list-view').classList.add('hidden');
+            document.getElementById('preview-view').classList.remove('hidden');
+            document.getElementById('preview-header').classList.remove('hidden');
+            window.scrollTo(0, 0);
+
+            // 填充資料
+            document.getElementById('preview-name').textContent = girl.name;
+            document.getElementById('preview-shop-name').textContent = girl.shop;
+            document.getElementById('main-iframe').src = girl.url;
+            document.getElementById('preview-external-link').href = girl.url;
+            
+            // 顏色設定
+            const dot = document.getElementById('preview-status-dot');
+            if (girl.type === 'soap-q') {
+                dot.classList.remove('bg-rose-400');
+                dot.classList.add('bg-purple-400');
+            } else {
+                dot.classList.remove('bg-purple-400');
+                dot.classList.add('bg-rose-400');
+            }
+        }
+
+        // 關閉預覽 (回到列表)
+        function closePreview() {
+            document.getElementById('list-view').classList.remove('hidden');
+            document.getElementById('preview-view').classList.add('hidden');
+            document.getElementById('preview-header').classList.add('hidden');
+            document.getElementById('main-iframe').src = ''; // 清空 iframe 節省資源
+        }
+
+        // 重新整理 Iframe
+        function refreshIframe() {
+            const iframe = document.getElementById('main-iframe');
+            iframe.src = iframe.src;
+        }
+    </script>
+</body>
+</html>
