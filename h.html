@@ -33,7 +33,7 @@
       gap: 8px;
     }
     .shop-title:before { content: "🏢"; font-size: 22px; }
-    .shop-title a { color: #207be0; text-decoration: none; }
+    .shop-title a { color: #207be0; text-decoration: none; cursor: pointer; }
     .shop-title a:hover { color: #f26161; text-decoration: underline; }
     .fees-section { margin-bottom: 12px; }
     .fees-label { font-size: 14px; font-weight: 600; color: #666; margin-bottom: 8px; }
@@ -49,17 +49,18 @@
     .dynamic-cp-section { margin-top: 10px; padding: 10px; background: #fff9f0; border-radius: 10px; border-left: 4px solid #ff9800; }
     .dynamic-cp-label { font-size: 13px; font-weight: 600; color: #e65100; margin-bottom: 8px; }
     .dynamic-cp-list { margin: 0; padding: 0; list-style: none; font-size: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
-    .dynamic-cp-item { padding: 6px 10px; background: #fff; border-radius: 6px; flex: 1; min-width: 100px; }
+    .dynamic-cp-item { padding: 6px 10px; background: #fff; border-radius: 6px; flex: 1; min-width: 110px; }
     .cp-rank { font-weight: 700; color: #ff6f00; margin-right: 4px; }
     .cp-time { font-weight: 600; color: #1e88e5; }
     .cp-value { font-weight: 600; color: #f26161; margin-left: 4px; }
     .shop-links { margin-top: 12px; display: flex; gap: 12px; flex-wrap: wrap; }
-    .shop-links a { display: inline-block; padding: 7px 17px; background: linear-gradient(90deg,#207be0 80%,#31b5ff 100%); color: #fff; font-weight: 600; border-radius: 20px; text-decoration: none; font-size: 15px; transition: background 0.22s; }
+    .shop-links a { display: inline-block; padding: 7px 17px; background: linear-gradient(90deg,#207be0 80%,#31b5ff 100%); color: #fff; font-weight: 600; border-radius: 20px; text-decoration: none; font-size: 15px; transition: background 0.22s; cursor: pointer; }
     .shop-links a:hover { background: linear-gradient(90deg,#31b5ff 20%,#207be0 100%); }
     .note { color: #888; font-size: 13px; margin-top: 8px; padding: 8px; background: #f8f9fc; border-left: 3px solid #31b5ff; border-radius: 4px; }
     .note-title { font-weight: 600; color: #1e88e5; margin-bottom: 4px; }
-    .translation-chat { margin-top: 36px; padding: 17px 16px; background: linear-gradient(90deg,#eaf6ff 70%,#c0eaff 100%); border-radius: 15px; text-align: center; font-size: 17px; color: #1e88e5; font-weight: 500; }
-    .translation-chat a { display: inline-block; margin-top: 11px; padding: 9px 30px; background: linear-gradient(90deg,#31b5ff 55%,#207be0 100%); color: #fff; font-weight: bold; border-radius: 20px; text-decoration: none; font-size: 16px; }
+    .translation-chat { margin-top: 36px; padding: 17px 16px; background: linear-gradient(90deg,#eaf6ff 70%,#c0eaff 100%); border-radius: 15px; box-shadow: 0 1px 10px rgba(44,159,255,0.09); text-align: center; font-size: 17px; color: #1e88e5; font-weight: 500; letter-spacing: 2px; position: relative; }
+    .translation-chat:before { content: "🌐"; font-size: 21px; position: absolute; left: 16px; top: 16px; }
+    .translation-chat a { display: inline-block; margin-top: 11px; padding: 9px 30px; background: linear-gradient(90deg,#31b5ff 55%,#207be0 100%); color: #fff; font-weight: bold; border-radius: 20px; text-decoration: none; font-size: 16px; letter-spacing: 2px; transition: background 0.23s; }
     .translation-chat a:hover { background: linear-gradient(90deg,#207be0 35%,#31b5ff 100%); }
   </style>
 </head>
@@ -67,7 +68,7 @@
   <div class="mobile-list">
     <!-- FANTASY Spa -->
     <div class="shop-item">
-      <div class="shop-title"><a href="https://www.google.com/maps/search/%E3%82%BD%E3%83%BC%E3%83%97%E3%83%A9%E3%83%B3%E3%83%89%20%E3%83%95%E3%82%A1%E3%83%B3%E3%82%BF%E3%82%B8%E3%83%BC%E3%82%B9%E3%83%91%20%E6%9C%AD%E5%B9%8C" target="_blank">ソープランド ファンタジースパ FANTASY Spa</a></div>
+      <div class="shop-title"><a onclick="openGoogleMap('%E3%82%BD%E3%83%BC%E3%83%97%E3%83%A9%E3%83%B3%E3%83%89%20%E3%83%95%E3%82%A1%E3%83%B3%E3%82%BF%E3%82%B8%E3%83%BC%E3%82%B9%E3%83%91%20%E6%9C%AD%E5%B9%8C')">ソープランド ファンタジースパ FANTASY Spa</a></div>
       <div class="fees-section">
         <div class="fees-label">💰 時間與價格</div>
         <ul class="fees-list">
@@ -93,7 +94,7 @@
 
     <!-- Happiness Sapporo -->
     <div class="shop-item">
-      <div class="shop-title"><a href="https://www.google.com/maps/search/Happiness%20Sapporo%20%E6%9C%AD%E5%B9%8C" target="_blank">ハピネス札幌 Happiness Sapporo</a></div>
+      <div class="shop-title"><a onclick="openGoogleMap('Happiness%20Sapporo%20%E6%9C%AD%E5%B9%8C')">ハピネス札幌 Happiness Sapporo</a></div>
       <div class="fees-section">
         <div class="fees-label">💰 時間與價格</div>
         <ul class="fees-list">
@@ -110,7 +111,7 @@
           <li class="dynamic-cp-item"><span class="cp-rank">🥉</span><span class="cp-time">90分</span> <span class="cp-value">527.78</span></li>
         </ul>
       </div>
-      <div class="note"><div class="note-title">📋 推薦前三：</div>🥇 60分鐘 | 🥈 75分鐘 | 🥉 90分鐘</div>
+      <div class="note"><div class="note-title">📋 推薦前三：</div>🥇 60分鐘 | 🥈 60+60分鐘(120分) | 🥉 75+75分鐘(150分)</div>
       <div class="shop-links">
         <a href="https://fujoho.jp/index.php?p=shop_info&id=59887" target="_blank">出勤查詢</a>
         <a href="https://lin.ee/qMmPn8x" target="_blank">LINE聯絡</a>
@@ -119,7 +120,7 @@
 
     <!-- salon de M -->
     <div class="shop-item">
-      <div class="shop-title"><a href="https://www.google.com/maps/search/salon%20de%20M%20%E6%9C%AD%E5%B9%8C" target="_blank">サロンドエム salon de M</a></div>
+      <div class="shop-title"><a onclick="openGoogleMap('salon%20de%20M%20%E6%9C%AD%E5%B9%8C')">サロンドエム salon de M</a></div>
       <div class="fees-section">
         <div class="fees-label">💰 時間與價格</div>
         <ul class="fees-list" id="salonFeesList">
@@ -148,7 +149,4 @@
           <li class="dynamic-cp-item"><span class="cp-rank">🥉</span><span class="cp-time">110分</span> <span class="cp-value">618.18</span></li>
         </ul>
       </div>
-      <div class="note"><div class="note-title">📋 推薦前三：</div><span id="salonRecommend">🥇 90分鐘 | 🥈 70分鐘 | 🥉 110分鐘</span></div>
-      <div class="shop-links">
-        <a href="https://www.cityheaven.net/hokkaido/A0101/A010103/soap_q/attend/" target="_blank">出勤查詢</a>
-        <a href="https://line.me/ti/p/iSXPYiUL5j" target="_blank">LINE聯
+      <div class="note"><div class="note-title">📋 推薦前三：</div><span id="salonRecommend">🥇 90分鐘 | 🥈 90+90分鐘(180分) | 🥉 70+70分鐘(140分)</span></div>
