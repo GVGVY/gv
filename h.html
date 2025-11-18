@@ -126,16 +126,16 @@
       <div class="shop-title"><a href="https://www.google.com/maps/search/salon+de+M+%E6%9C%AD%E5%B9%8C" target="_blank">サロンドエム salon de M</a></div>
       <div class="fees-section">
         <div class="fees-label">💰 時間與價格</div>
-        <ul class="fees-list">
-          <li><span class="time">70分鐘</span><div class="price-cp"><span class="price">43,000日元</span><span class="cp">614.29/分</span></div></li>
-          <li><span class="time">90分鐘</span><div class="price-cp"><span class="price">55,000日元</span><span class="cp">611.11/分</span></div></li>
-          <li><span class="time">110分鐘</span><div class="price-cp"><span class="price">68,000日元</span><span class="cp">618.18/分</span></div></li>
+        <ul class="fees-list" id="salonFeesList">
+          <li><span class="time">70分鐘</span><div class="price-cp"><span class="price">43,000日元</span><span class="cp" data-minutes="70" data-base-price="43000">614.29/分</span></div></li>
+          <li><span class="time">90分鐘</span><div class="price-cp"><span class="price">55,000日元</span><span class="cp" data-minutes="90" data-base-price="55000">611.11/分</span></div></li>
+          <li><span class="time">110分鐘</span><div class="price-cp"><span class="price">68,000日元</span><span class="cp" data-minutes="110" data-base-price="68000">618.18/分</span></div></li>
         </ul>
       </div>
 
       <div class="nominate-section">
         <div class="nominate-label">🎯 選擇指名費</div>
-        <select class="nominate-select" onchange="updateCPValues()">
+        <select class="nominate-select" id="salonSelect" onchange="updateSalonCP()">
           <option value="0">無指名費 (0日元)</option>
           <option value="2000">2,000日元</option>
           <option value="3000">3,000日元</option>
@@ -146,5 +146,4 @@
 
       <div class="dynamic-cp-section">
         <div class="dynamic-cp-label">⭐ 動態 CP 值排序 (前三名)</div>
-        <ul class="dynamic-cp-list" id="salonCPList">
-          <li class="dynamic-cp-item"><span class="cp-rank">🥇</span><span class="cp-time">90分鐘</span><span class="cp-method">(分鐘相加/單)</span> — <span class="cp
+        <ul
