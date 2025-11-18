@@ -28,42 +28,58 @@
       font-size: 19px;
       font-weight: 700;
       color: #207be0;
-      margin-bottom: 4px;
+      margin-bottom: 12px;
       letter-spacing: 1px;
       display: flex;
       align-items: center;
-      gap:6px;
+      gap:8px;
     }
     .shop-title:before {
       content: "🏢";
       font-size: 22px;
       vertical-align: middle;
     }
+    .fees-section {
+      margin-bottom: 12px;
+    }
+    .fees-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #666;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
     .fees-list {
-      margin: 0 0 10px 0;
-      padding:0;
+      margin: 0;
+      padding: 0;
       list-style: none;
-      color:#223;
-      font-size:15px;
+      color: #333;
+      font-size: 15px;
+      line-height: 1.8;
     }
     .fees-list li {
-      margin-bottom: 2px;
-      padding-left: 1em;
-      position: relative;
+      margin-bottom: 0;
+      padding: 4px 0;
+      border-bottom: 1px solid #e8eef7;
     }
-    .fees-list li:before {
-      content: "💰";
-      position: absolute;
-      left:0;
-      font-size: 14px;
+    .fees-list li:last-child {
+      border-bottom: none;
+    }
+    .fees-list .time {
+      color: #666;
+      font-weight: 500;
+    }
+    .fees-list .price {
+      color: #f26161;
+      font-weight: 700;
     }
     .shop-links {
-      margin-top: 10px;
+      margin-top: 12px;
       display: flex;
       gap: 12px;
     }
     .shop-links a {
-      display:inline-block;
+      display: inline-block;
       padding: 7px 17px;
       background: linear-gradient(90deg,#207be0 80%,#31b5ff 100%);
       color: #fff;
@@ -73,16 +89,19 @@
       font-size: 15px;
       box-shadow: 0 1px 6px rgba(60,110,255,0.06);
       transition: background 0.22s;
-      letter-spacing:1px;
+      letter-spacing: 1px;
     }
     .shop-links a:hover {
       background: linear-gradient(90deg,#31b5ff 20%,#207be0 100%);
     }
     .note {
-      color:#888;
-      font-size:14px;
-      margin-top:8px;
-      padding-left: 1.6em;
+      color: #888;
+      font-size: 14px;
+      margin-top: 8px;
+      padding: 8px;
+      background: #f8f9fc;
+      border-left: 3px solid #31b5ff;
+      border-radius: 4px;
     }
     .translation-chat {
       margin-top: 36px;
@@ -101,11 +120,11 @@
       content: "🌐";
       font-size: 21px;
       position: absolute;
-      left:16px;
-      top:16px;
+      left: 16px;
+      top: 16px;
     }
     .translation-chat a {
-      display:inline-block;
+      display: inline-block;
       margin-top: 11px;
       padding: 9px 30px;
       background: linear-gradient(90deg,#31b5ff 55%,#207be0 100%);
@@ -126,13 +145,16 @@
   <div class="mobile-list">
     <div class="shop-item">
       <div class="shop-title">ソープランド ファンタジースパ FANTASY Spa泡泡浴</div>
-      <ul class="fees-list">
-        <li>70分鐘：44,000日圓</li>
-        <li>90分鐘：55,000日圓</li>
-        <li>110分鐘：68,000日圓</li>
-        <li>延長20分鐘：12,000日圓</li>
-        <li>指名費用：2,000日圓</li>
-      </ul>
+      <div class="fees-section">
+        <div class="fees-label">💰 時間與價格</div>
+        <ul class="fees-list">
+          <li><span class="time">70分鐘</span> — <span class="price">44,000日圓</span></li>
+          <li><span class="time">90分鐘</span> — <span class="price">55,000日圓</span></li>
+          <li><span class="time">110分鐘</span> — <span class="price">68,000日圓</span></li>
+          <li><span class="time">延長20分鐘</span> — <span class="price">12,000日圓</span></li>
+          <li><span class="time">指名費</span> — <span class="price">2,000日圓</span></li>
+        </ul>
+      </div>
       <div class="shop-links">
         <a href="https://www.cityheaven.net/hokkaido/A0101/A010103/fantasispa/attend/" target="_blank">出勤查詢</a>
         <a href="https://line.me/ti/p/GpYCQJr92B" target="_blank">LINE聯絡</a>
@@ -140,12 +162,15 @@
     </div>
     <div class="shop-item">
       <div class="shop-title">ハピネス札幌 Happiness Sapporo</div>
-      <ul class="fees-list">
-        <li>60分鐘：30,000日圓</li>
-        <li>75分鐘：38,000日圓</li>
-        <li>90分鐘：46,000日圓</li>
-        <li>指定費用：3,000日圓</li>
-      </ul>
+      <div class="fees-section">
+        <div class="fees-label">💰 時間與價格</div>
+        <ul class="fees-list">
+          <li><span class="time">60分鐘</span> — <span class="price">30,000日圓</span></li>
+          <li><span class="time">75分鐘</span> — <span class="price">38,000日圓</span></li>
+          <li><span class="time">90分鐘</span> — <span class="price">46,000日圓</span></li>
+          <li><span class="time">指名費</span> — <span class="price">3,000日圓</span></li>
+        </ul>
+      </div>
       <div class="shop-links">
         <a href="https://fujoho.jp/index.php?p=shop_info&id=59887" target="_blank">出勤查詢</a>
         <a href="https://lin.ee/qMmPn8x" target="_blank">LINE聯絡</a>
@@ -153,12 +178,15 @@
     </div>
     <div class="shop-item">
       <div class="shop-title">サロンドエム salon de M</div>
-      <ul class="fees-list">
-        <li>70分鐘：43,000日元</li>
-        <li>90分鐘：55,000日元</li>
-        <li>110分鐘：68,000日元</li>
-      </ul>
-      <div class="note">*不能現場指定小姐，提前預約可能可指定</div>
+      <div class="fees-section">
+        <div class="fees-label">💰 時間與價格</div>
+        <ul class="fees-list">
+          <li><span class="time">70分鐘</span> — <span class="price">43,000日元</span></li>
+          <li><span class="time">90分鐘</span> — <span class="price">55,000日元</span></li>
+          <li><span class="time">110分鐘</span> — <span class="price">68,000日元</span></li>
+        </ul>
+      </div>
+      <div class="note">⚠️ 不能現場指定小姐，提前預約可能可指定</div>
       <div class="shop-links">
         <a href="https://www.cityheaven.net/hokkaido/A0101/A010103/soap_q/attend/" target="_blank">出勤查詢</a>
         <a href="https://line.me/ti/p/iSXPYiUL5j" target="_blank">LINE聯絡</a>
