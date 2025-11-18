@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>出勤查詢儀表板</title>
-    <!-- 引入 Tailwind CSS 進行排版 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* 額外的自定義樣式 */
@@ -17,11 +16,9 @@
 </head>
 <body class="bg-slate-50 text-slate-900 pb-safe min-h-screen">
 
-    <!-- 頂部導航列 (預設隱藏，預覽模式才顯示) -->
     <header id="preview-header" class="bg-white shadow-sm sticky top-0 z-20 border-b border-slate-200 hidden">
         <div class="max-w-4xl mx-auto px-4 py-3 flex items-center">
             <button onclick="closePreview()" class="flex items-center gap-1 text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-full transition-colors active:scale-95">
-                <!-- ArrowLeft Icon -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
                 回列表
             </button>
@@ -30,38 +27,60 @@
 
     <main class="max-w-4xl mx-auto p-4 md:p-6">
         
-        <!-- 列表模式視圖 -->
         <div id="list-view">
-            <!-- 女生列表容器 -->
             <div id="girls-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <!-- JS 會自動填入內容 -->
-            </div>
+                </div>
 
-            <!-- 手機提示 -->
             <div class="mt-6 p-4 bg-slate-100 rounded-lg flex gap-3 items-start text-sm text-slate-500">
-                <!-- Smartphone Icon -->
                 <svg class="w-5 h-5 flex-shrink-0 mt-0.5 opacity-50" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
                 <div>
                     <p>點擊卡片會開啟內嵌預覽。如果網站無法顯示，請使用預覽視窗右上角的「跳轉開啟」按鈕。</p>
                 </div>
             </div>
 
-            <!-- 地圖導航區塊 -->
             <div class="mt-8 pt-6 border-t border-slate-200">
+                
                 <h3 class="flex items-center gap-2 font-bold text-slate-700 mb-4">
-                    <!-- MapPin Icon -->
+                    <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    店家 LINE 官方帳號
+                </h3>
+                <div id="line-links-grid" class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+                    <a href="https://line.me/ti/p/iSXPYiUL5j" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center bg-white p-3 rounded-lg border border-slate-200 hover:border-green-400 hover:shadow-md transition-all group no-underline">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-500 group-hover:bg-green-100 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 20.816A9.993 9.993 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10a9.993 9.993 0 0 1-8 8.816L12 22l-2-1.184zM9 16l3-3 3 3V8M12 12L9 9 15 9z" fill="currentColor"/></svg>
+                            </div>
+                            <p class="font-bold text-slate-800 group-hover:text-green-600 text-sm truncate">salon de M</p>
+                        </div>
+                    </a>
+                    <a href="https://line.me/ti/p/GpYCQJr92B" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center bg-white p-3 rounded-lg border border-slate-200 hover:border-green-400 hover:shadow-md transition-all group no-underline">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-500 group-hover:bg-green-100 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 20.816A9.993 9.993 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10a9.993 9.993 0 0 1-8 8.816L12 22l-2-1.184zM9 16l3-3 3 3V8M12 12L9 9 15 9z" fill="currentColor"/></svg>
+                            </div>
+                            <p class="font-bold text-slate-800 group-hover:text-green-600 text-sm truncate">FANTASY Spa</p>
+                        </div>
+                    </a>
+                    <a href="https://line.me/R/ti/p/@fmp0172b?ts=08221917&oat_content=url" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center bg-white p-3 rounded-lg border border-slate-200 hover:border-green-400 hover:shadow-md transition-all group no-underline">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-500 group-hover:bg-green-100 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 20.816A9.993 9.993 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10a9.993 9.993 0 0 1-8 8.816L12 22l-2-1.184zM9 16l3-3 3 3V8M12 12L9 9 15 9z" fill="currentColor"/></svg>
+                            </div>
+                            <p class="font-bold text-slate-800 group-hover:text-green-600 text-sm truncate">Happiness Sapporo</p>
+                        </div>
+                    </a>
+                </div>
+
+                <h3 class="flex items-center gap-2 font-bold text-slate-700 mb-4">
                     <svg class="w-5 h-5 text-rose-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                     店家地圖導航
                 </h3>
                 <div id="maps-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <!-- JS 會自動填入內容 -->
-                </div>
+                    </div>
             </div>
         </div>
 
-        <!-- 預覽模式視圖 (預設隱藏) -->
         <div id="preview-view" class="hidden flex flex-col h-[80vh] bg-white rounded-xl shadow-xl overflow-hidden border border-slate-200">
-            <!-- 控制列 -->
             <div class="bg-slate-800 text-white p-3 flex flex-wrap gap-2 justify-between items-center shadow-md z-10">
                 <div class="flex items-center gap-2 min-w-0">
                     <div id="preview-status-dot" class="w-2 h-2 rounded-full flex-shrink-0 bg-rose-400"></div>
@@ -70,11 +89,9 @@
                 
                 <div class="flex gap-2">
                     <button onclick="refreshIframe()" class="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-200 transition-colors" title="重新整理預覽">
-                        <!-- RefreshCw Icon -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
                     </button>
                     <a id="preview-external-link" href="#" target="_blank" class="flex items-center gap-1 bg-rose-600 hover:bg-rose-700 px-4 py-1.5 rounded-lg text-sm font-bold shadow-sm transition-all active:scale-95 no-underline text-white">
-                        <!-- ExternalLink Icon -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                         <span class="hidden sm:inline">跳轉開啟</span>
                         <span class="sm:hidden">開啟</span>
@@ -82,11 +99,9 @@
                 </div>
             </div>
             
-            <!-- Iframe 容器 -->
             <div class="flex-1 relative bg-slate-100 w-full">
                 <div class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 p-8 text-center z-0 pointer-events-none">
                     <div class="animate-pulse mb-4">
-                        <!-- Store Icon -->
                         <svg class="w-12 h-12 opacity-20" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2v0a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12v0a2 2 0 0 1-2-2V7"/></svg>
                     </div>
                     <p class="font-medium text-slate-500">正在載入 <span id="preview-shop-name"></span> 的頁面...</p>
