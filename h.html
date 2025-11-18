@@ -32,12 +32,22 @@
       letter-spacing: 1px;
       display: flex;
       align-items: center;
-      gap:8px;
+      gap: 8px;
     }
     .shop-title:before {
       content: "🏢";
       font-size: 22px;
       vertical-align: middle;
+    }
+    .shop-title a {
+      color: #207be0;
+      text-decoration: none;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+    .shop-title a:hover {
+      color: #f26161;
+      text-decoration: underline;
     }
     .fees-section {
       margin-bottom: 12px;
@@ -77,6 +87,7 @@
       margin-top: 12px;
       display: flex;
       gap: 12px;
+      flex-wrap: wrap;
     }
     .shop-links a {
       display: inline-block;
@@ -144,14 +155,15 @@
 <body>
   <div class="mobile-list">
     <div class="shop-item">
-      <div class="shop-title">ソープランド ファンタジースパ FANTASY Spa泡泡浴</div>
+      <div class="shop-title">
+        <a href="https://www.google.com/maps/search/FANTASY+Spa%E6%B3%A1%E6%B3%A1%E6%B5%B4+%E6%9C%AD%E5%B9%8C" target="_blank">ソープランド ファンタジースパ FANTASY Spa泡泡浴</a>
+      </div>
       <div class="fees-section">
         <div class="fees-label">💰 時間與價格</div>
         <ul class="fees-list">
           <li><span class="time">70分鐘</span> — <span class="price">44,000日圓</span></li>
           <li><span class="time">90分鐘</span> — <span class="price">55,000日圓</span></li>
           <li><span class="time">110分鐘</span> — <span class="price">68,000日圓</span></li>
-          <li><span class="time">延長20分鐘</span> — <span class="price">12,000日圓</span></li>
           <li><span class="time">指名費</span> — <span class="price">2,000日圓</span></li>
         </ul>
       </div>
@@ -161,7 +173,9 @@
       </div>
     </div>
     <div class="shop-item">
-      <div class="shop-title">ハピネス札幌 Happiness Sapporo</div>
+      <div class="shop-title">
+        <a href="https://www.google.com/maps/search/Happiness+Sapporo+%E6%9C%AD%E5%B9%8C" target="_blank">ハピネス札幌 Happiness Sapporo</a>
+      </div>
       <div class="fees-section">
         <div class="fees-label">💰 時間與價格</div>
         <ul class="fees-list">
@@ -177,7 +191,9 @@
       </div>
     </div>
     <div class="shop-item">
-      <div class="shop-title">サロンドエム salon de M</div>
+      <div class="shop-title">
+        <a href="https://www.google.com/maps/search/salon+de+M+%E6%9C%AD%E5%B9%8C" target="_blank">サロンドエム salon de M</a>
+      </div>
       <div class="fees-section">
         <div class="fees-label">💰 時間與價格</div>
         <ul class="fees-list">
