@@ -23,7 +23,7 @@
 <body class="bg-slate-50 text-slate-900 min-h-screen pb-safe">
 
     <!-- 主要內容區域 (列表) -->
-    <main id="list-view" class="max-w-4xl mx-auto p-4 md:p-6 pb-24 transition-opacity duration-300">
+    <main id="list-view" class="max-w-5xl mx-auto p-4 md:p-6 pb-24 transition-opacity duration-300">
         
         <!-- 標題區 -->
         <div class="mb-6">
@@ -49,59 +49,165 @@
             <!-- LINE 區塊 -->
             <h3 class="flex items-center gap-2 font-bold text-slate-700 mb-4">
                 <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                店家 LINE 官方帳號 (含指名料 ¥2,000)
+                店家指南 & 價格 (含指名料 ¥2,000)
             </h3>
+            
             <!-- 調整 grid-cols 以容納 4 個項目，改為 flex-col 排版以顯示價格 -->
             <div id="line-links-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+                
                 <!-- salon de M -->
-                <a href="https://line.me/ti/p/iSXPYiUL5j" target="_blank" class="flex flex-col bg-white p-3 rounded-lg border border-slate-200 hover:border-green-400 hover:shadow-md transition-all group no-underline active:scale-95 h-full">
-                    <div class="flex items-center gap-3 mb-3">
+                <a href="https://line.me/ti/p/iSXPYiUL5j" target="_blank" class="flex flex-col bg-white p-3 rounded-lg border border-slate-200 hover:border-green-400 hover:shadow-md transition-all group no-underline active:scale-95 h-full relative overflow-hidden">
+                    <div class="flex items-center gap-3 mb-2">
                         <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-500 group-hover:bg-green-100 transition-colors shrink-0">L</div>
-                        <p class="font-bold text-slate-800 group-hover:text-green-600 text-sm truncate">salon de M</p>
+                        <div>
+                            <p class="font-bold text-slate-800 group-hover:text-green-600 text-sm truncate">salon de M</p>
+                            <span class="text-[10px] bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded">穩定不踩雷</span>
+                        </div>
                     </div>
-                    <div class="mt-auto pt-2 border-t border-slate-100 space-y-1">
-                        <div class="flex justify-between text-xs text-slate-600"><span>70分</span><span class="font-mono font-bold">¥45,000</span></div>
-                        <div class="flex justify-between text-xs text-slate-600"><span>90分</span><span class="font-mono font-bold">¥57,000</span></div>
-                        <div class="flex justify-between text-xs text-slate-600"><span>110分</span><span class="font-mono font-bold">¥70,000</span></div>
+                    <!-- 評語 -->
+                    <div class="mb-3 px-2 py-1.5 bg-slate-50 rounded text-[11px] text-slate-600 border border-slate-100 leading-relaxed">
+                        <span class="text-green-600 font-bold">特色：</span>品質控管穩，教育訓練紮實。服務與外貌平衡最好的安全牌，適合怕踩雷的人。
+                    </div>
+                    <div class="mt-auto pt-2 border-t border-slate-100 space-y-2">
+                        <div class="flex justify-between items-center text-xs text-slate-600 px-1">
+                            <span>70分</span>
+                            <div class="text-right">
+                                <div class="font-mono font-bold">¥45,000</div>
+                                <div class="text-[9px] text-slate-400">¥643/分</div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-xs text-slate-800 bg-yellow-50 border border-yellow-100 rounded px-1 py-1">
+                            <span class="flex items-center gap-1">90分 <span class="text-[9px] bg-yellow-200 text-yellow-800 px-1 rounded">推</span></span>
+                            <div class="text-right">
+                                <div class="font-mono font-bold text-rose-500">¥57,000</div>
+                                <div class="text-[9px] text-rose-400">¥633/分</div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-xs text-slate-600 px-1">
+                            <span>110分</span>
+                            <div class="text-right">
+                                <div class="font-mono font-bold">¥70,000</div>
+                                <div class="text-[9px] text-slate-400">¥636/分</div>
+                            </div>
+                        </div>
                     </div>
                 </a>
 
                 <!-- FANTASY Spa -->
-                <a href="https://line.me/ti/p/GpYCQJr92B" target="_blank" class="flex flex-col bg-white p-3 rounded-lg border border-slate-200 hover:border-green-400 hover:shadow-md transition-all group no-underline active:scale-95 h-full">
-                    <div class="flex items-center gap-3 mb-3">
+                <a href="https://line.me/ti/p/GpYCQJr92B" target="_blank" class="flex flex-col bg-white p-3 rounded-lg border border-slate-200 hover:border-green-400 hover:shadow-md transition-all group no-underline active:scale-95 h-full relative overflow-hidden">
+                    <div class="flex items-center gap-3 mb-2">
                         <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-500 group-hover:bg-green-100 transition-colors shrink-0">L</div>
-                        <p class="font-bold text-slate-800 group-hover:text-green-600 text-sm truncate">FANTASY Spa</p>
+                        <div>
+                            <p class="font-bold text-slate-800 group-hover:text-green-600 text-sm truncate">FANTASY Spa</p>
+                            <span class="text-[10px] bg-purple-50 text-purple-600 px-1.5 py-0.5 rounded">顏值與硬體</span>
+                        </div>
                     </div>
-                    <div class="mt-auto pt-2 border-t border-slate-100 space-y-1">
-                        <div class="flex justify-between text-xs text-slate-600"><span>70分</span><span class="font-mono font-bold">¥46,000</span></div>
-                        <div class="flex justify-between text-xs text-slate-600"><span>90分</span><span class="font-mono font-bold">¥57,000</span></div>
-                        <div class="flex justify-between text-xs text-slate-600"><span>110分</span><span class="font-mono font-bold">¥70,000</span></div>
+                    <!-- 評語 -->
+                    <div class="mb-3 px-2 py-1.5 bg-slate-50 rounded text-[11px] text-slate-600 border border-slate-100 leading-relaxed">
+                        <span class="text-green-600 font-bold">特色：</span>主打高級感與視覺衝擊，適合對臉蛋身材有高標準的「外貌協會」玩家。
+                    </div>
+                    <div class="mt-auto pt-2 border-t border-slate-100 space-y-2">
+                        <div class="flex justify-between items-center text-xs text-slate-600 px-1">
+                            <span>70分</span>
+                            <div class="text-right">
+                                <div class="font-mono font-bold">¥46,000</div>
+                                <div class="text-[9px] text-slate-400">¥657/分</div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-xs text-slate-800 bg-yellow-50 border border-yellow-100 rounded px-1 py-1">
+                            <span class="flex items-center gap-1">90分 <span class="text-[9px] bg-yellow-200 text-yellow-800 px-1 rounded">推</span></span>
+                            <div class="text-right">
+                                <div class="font-mono font-bold text-rose-500">¥57,000</div>
+                                <div class="text-[9px] text-rose-400">¥633/分</div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-xs text-slate-600 px-1">
+                            <span>110分</span>
+                            <div class="text-right">
+                                <div class="font-mono font-bold">¥70,000</div>
+                                <div class="text-[9px] text-slate-400">¥636/分</div>
+                            </div>
+                        </div>
                     </div>
                 </a>
 
                 <!-- Happiness -->
-                <a href="https://line.me/R/ti/p/@fmp0172b?ts=08221917&oat_content=url" target="_blank" class="flex flex-col bg-white p-3 rounded-lg border border-slate-200 hover:border-green-400 hover:shadow-md transition-all group no-underline active:scale-95 h-full">
-                    <div class="flex items-center gap-3 mb-3">
+                <a href="https://line.me/R/ti/p/@fmp0172b?ts=08221917&oat_content=url" target="_blank" class="flex flex-col bg-white p-3 rounded-lg border border-rose-200 shadow-sm hover:border-rose-400 hover:shadow-md transition-all group no-underline active:scale-95 h-full relative overflow-hidden ring-1 ring-rose-100">
+                    <div class="absolute top-0 right-0 bg-rose-500 text-white text-[9px] px-2 py-0.5 rounded-bl-lg font-bold">CP值王者</div>
+                    <div class="flex items-center gap-3 mb-2">
                         <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-500 group-hover:bg-green-100 transition-colors shrink-0">L</div>
-                        <p class="font-bold text-slate-800 group-hover:text-green-600 text-sm truncate">Happiness</p>
+                        <div>
+                            <p class="font-bold text-slate-800 group-hover:text-green-600 text-sm truncate">Happiness</p>
+                            <span class="text-[10px] bg-rose-50 text-rose-600 px-1.5 py-0.5 rounded">新手最友善</span>
+                        </div>
                     </div>
-                    <div class="mt-auto pt-2 border-t border-slate-100 space-y-1">
-                        <div class="flex justify-between text-xs text-slate-600"><span>60分</span><span class="font-mono font-bold text-rose-500">¥32,000</span></div>
-                        <div class="flex justify-between text-xs text-slate-600"><span>75分</span><span class="font-mono font-bold text-rose-500">¥40,000</span></div>
-                        <div class="flex justify-between text-xs text-slate-600"><span>90分</span><span class="font-mono font-bold text-rose-500">¥48,000</span></div>
+                    <!-- 評語 -->
+                    <div class="mb-3 px-2 py-1.5 bg-slate-50 rounded text-[11px] text-slate-600 border border-slate-100 leading-relaxed">
+                        <span class="text-green-600 font-bold">特色：</span>女孩多、新人多，價格最便宜。適合第一次體驗、喜歡嘗鮮或預算考量的玩家。
+                    </div>
+                    <div class="mt-auto pt-2 border-t border-slate-100 space-y-2">
+                        <div class="flex justify-between items-center text-xs text-slate-600 px-1">
+                            <span>60分</span>
+                            <div class="text-right">
+                                <div class="font-mono font-bold text-slate-700">¥32,000</div>
+                                <div class="text-[9px] text-slate-400">¥533/分</div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-xs text-slate-600 px-1">
+                            <span>90分</span>
+                            <div class="text-right">
+                                <div class="font-mono font-bold text-slate-700">¥48,000</div>
+                                <div class="text-[9px] text-slate-400">¥533/分</div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-xs text-slate-800 bg-rose-50 border border-rose-100 rounded px-1 py-1">
+                            <div class="flex flex-col leading-tight">
+                                <span class="flex items-center gap-1">60分+60分</span>
+                                <span class="text-[9px] bg-rose-500 text-white px-1 rounded w-fit mt-0.5">神CP</span>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-mono font-bold text-rose-600">¥62,000</div>
+                                <div class="text-[9px] text-rose-500 font-bold">¥517/分</div>
+                            </div>
+                        </div>
                     </div>
                 </a>
 
                 <!-- 夢の扉 -->
-                <a href="https://line.me/ti/p/gZtxbw6LGw" target="_blank" class="flex flex-col bg-white p-3 rounded-lg border border-slate-200 hover:border-green-400 hover:shadow-md transition-all group no-underline active:scale-95 h-full">
-                    <div class="flex items-center gap-3 mb-3">
+                <a href="https://line.me/ti/p/gZtxbw6LGw" target="_blank" class="flex flex-col bg-white p-3 rounded-lg border border-slate-200 hover:border-green-400 hover:shadow-md transition-all group no-underline active:scale-95 h-full relative overflow-hidden">
+                    <div class="flex items-center gap-3 mb-2">
                         <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-500 group-hover:bg-green-100 transition-colors shrink-0">L</div>
-                        <p class="font-bold text-slate-800 group-hover:text-green-600 text-sm truncate">夢の扉</p>
+                        <div>
+                            <p class="font-bold text-slate-800 group-hover:text-green-600 text-sm truncate">夢の扉</p>
+                            <span class="text-[10px] bg-pink-50 text-pink-500 px-1.5 py-0.5 rounded">戀愛沉浸感</span>
+                        </div>
                     </div>
-                    <div class="mt-auto pt-2 border-t border-slate-100 space-y-1">
-                        <div class="flex justify-between text-xs text-slate-600"><span>70分</span><span class="font-mono font-bold">¥45,000</span></div>
-                        <div class="flex justify-between text-xs text-slate-600"><span>100分</span><span class="font-mono font-bold">¥68,000</span></div>
-                        <div class="flex justify-between text-xs text-slate-600"><span>140分</span><span class="font-mono font-bold">¥88,000</span></div>
+                    <!-- 評語 -->
+                    <div class="mb-3 px-2 py-1.5 bg-slate-50 rounded text-[11px] text-slate-600 border border-slate-100 leading-relaxed">
+                        <span class="text-green-600 font-bold">特色：</span>主打女友感(GFE)與細膩服務。短時間偏貴，但長鐘方案划算，適合想慢熱互動的人。
+                    </div>
+                    <div class="mt-auto pt-2 border-t border-slate-100 space-y-2">
+                        <div class="flex justify-between items-center text-xs text-slate-600 px-1">
+                            <span>70分</span>
+                            <div class="text-right">
+                                <div class="font-mono font-bold">¥45,000</div>
+                                <div class="text-[9px] text-slate-400">¥643/分</div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-xs text-slate-400 px-1 decoration-slate-300 decoration-2">
+                            <span>100分</span>
+                            <div class="text-right">
+                                <div class="font-mono">¥68,000</div>
+                                <div class="text-[9px]">¥680/分</div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center text-xs text-slate-800 bg-yellow-50 border border-yellow-100 rounded px-1 py-1">
+                            <span class="flex items-center gap-1">140分 <span class="text-[9px] bg-yellow-200 text-yellow-800 px-1 rounded">推</span></span>
+                            <div class="text-right">
+                                <div class="font-mono font-bold text-rose-500">¥88,000</div>
+                                <div class="text-[9px] text-rose-400">¥629/分</div>
+                            </div>
+                        </div>
                     </div>
                 </a>
             </div>
