@@ -49,25 +49,59 @@
             <!-- LINE 區塊 -->
             <h3 class="flex items-center gap-2 font-bold text-slate-700 mb-4">
                 <svg class="w-5 h-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                店家 LINE 官方帳號
+                店家 LINE 官方帳號 (含指名料 ¥2,000)
             </h3>
-            <div id="line-links-grid" class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
-                <a href="https://line.me/ti/p/iSXPYiUL5j" target="_blank" class="flex items-center justify-center bg-white p-3 rounded-lg border border-slate-200 hover:border-green-400 hover:shadow-md transition-all group no-underline active:scale-95">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-500 group-hover:bg-green-100 transition-colors">L</div>
+            <!-- 調整 grid-cols 以容納 4 個項目，改為 flex-col 排版以顯示價格 -->
+            <div id="line-links-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+                <!-- salon de M -->
+                <a href="https://line.me/ti/p/iSXPYiUL5j" target="_blank" class="flex flex-col bg-white p-3 rounded-lg border border-slate-200 hover:border-green-400 hover:shadow-md transition-all group no-underline active:scale-95 h-full">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-500 group-hover:bg-green-100 transition-colors shrink-0">L</div>
                         <p class="font-bold text-slate-800 group-hover:text-green-600 text-sm truncate">salon de M</p>
                     </div>
-                </a>
-                <a href="https://line.me/ti/p/GpYCQJr92B" target="_blank" class="flex items-center justify-center bg-white p-3 rounded-lg border border-slate-200 hover:border-green-400 hover:shadow-md transition-all group no-underline active:scale-95">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-500 group-hover:bg-green-100 transition-colors">L</div>
-                        <p class="font-bold text-slate-800 group-hover:text-green-600 text-sm truncate">FANTASY Spa</p>
+                    <div class="mt-auto pt-2 border-t border-slate-100 space-y-1">
+                        <div class="flex justify-between text-xs text-slate-600"><span>70分</span><span class="font-mono font-bold">¥45,000</span></div>
+                        <div class="flex justify-between text-xs text-slate-600"><span>90分</span><span class="font-mono font-bold">¥57,000</span></div>
+                        <div class="flex justify-between text-xs text-slate-600"><span>110分</span><span class="font-mono font-bold">¥70,000</span></div>
                     </div>
                 </a>
-                <a href="https://line.me/R/ti/p/@fmp0172b?ts=08221917&oat_content=url" target="_blank" class="flex items-center justify-center bg-white p-3 rounded-lg border border-slate-200 hover:border-green-400 hover:shadow-md transition-all group no-underline active:scale-95">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-500 group-hover:bg-green-100 transition-colors">L</div>
+
+                <!-- FANTASY Spa -->
+                <a href="https://line.me/ti/p/GpYCQJr92B" target="_blank" class="flex flex-col bg-white p-3 rounded-lg border border-slate-200 hover:border-green-400 hover:shadow-md transition-all group no-underline active:scale-95 h-full">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-500 group-hover:bg-green-100 transition-colors shrink-0">L</div>
+                        <p class="font-bold text-slate-800 group-hover:text-green-600 text-sm truncate">FANTASY Spa</p>
+                    </div>
+                    <div class="mt-auto pt-2 border-t border-slate-100 space-y-1">
+                        <div class="flex justify-between text-xs text-slate-600"><span>70分</span><span class="font-mono font-bold">¥46,000</span></div>
+                        <div class="flex justify-between text-xs text-slate-600"><span>90分</span><span class="font-mono font-bold">¥57,000</span></div>
+                        <div class="flex justify-between text-xs text-slate-600"><span>110分</span><span class="font-mono font-bold">¥70,000</span></div>
+                    </div>
+                </a>
+
+                <!-- Happiness -->
+                <a href="https://line.me/R/ti/p/@fmp0172b?ts=08221917&oat_content=url" target="_blank" class="flex flex-col bg-white p-3 rounded-lg border border-slate-200 hover:border-green-400 hover:shadow-md transition-all group no-underline active:scale-95 h-full">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-500 group-hover:bg-green-100 transition-colors shrink-0">L</div>
                         <p class="font-bold text-slate-800 group-hover:text-green-600 text-sm truncate">Happiness</p>
+                    </div>
+                    <div class="mt-auto pt-2 border-t border-slate-100 space-y-1">
+                        <div class="flex justify-between text-xs text-slate-600"><span>60分</span><span class="font-mono font-bold text-rose-500">¥32,000</span></div>
+                        <div class="flex justify-between text-xs text-slate-600"><span>75分</span><span class="font-mono font-bold text-rose-500">¥40,000</span></div>
+                        <div class="flex justify-between text-xs text-slate-600"><span>90分</span><span class="font-mono font-bold text-rose-500">¥48,000</span></div>
+                    </div>
+                </a>
+
+                <!-- 夢の扉 -->
+                <a href="https://line.me/ti/p/gZtxbw6LGw" target="_blank" class="flex flex-col bg-white p-3 rounded-lg border border-slate-200 hover:border-green-400 hover:shadow-md transition-all group no-underline active:scale-95 h-full">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-500 group-hover:bg-green-100 transition-colors shrink-0">L</div>
+                        <p class="font-bold text-slate-800 group-hover:text-green-600 text-sm truncate">夢の扉</p>
+                    </div>
+                    <div class="mt-auto pt-2 border-t border-slate-100 space-y-1">
+                        <div class="flex justify-between text-xs text-slate-600"><span>70分</span><span class="font-mono font-bold">¥45,000</span></div>
+                        <div class="flex justify-between text-xs text-slate-600"><span>100分</span><span class="font-mono font-bold">¥68,000</span></div>
+                        <div class="flex justify-between text-xs text-slate-600"><span>140分</span><span class="font-mono font-bold">¥88,000</span></div>
                     </div>
                 </a>
             </div>
@@ -84,7 +118,6 @@
     </main>
 
     <!-- 全螢幕預覽視窗 (預設隱藏) -->
-    <!-- 使用 fixed inset-0 佔滿全螢幕，z-50 確保在最上層 -->
     <div id="preview-view" class="hidden fixed inset-0 z-50 bg-white flex flex-col fade-in">
         
         <!-- 1. 頂部標題列 -->
@@ -138,7 +171,7 @@
     </div>
 
     <script>
-        // --- 資料設定 (保持不變) ---
+        // --- 資料設定 ---
         const GIRLS_DATA = [
             { id: 1, name: "新垣いちる", shop: "Soap-Q (Hokkaido)", url: "https://soap-q.hokkaido-susukino.net/top/girls/girldetail/?girl_id=29622850", type: "soap-q" },
             { id: 2, name: "りか", shop: "Soap-Q (Hokkaido)", url: "https://soap-q.hokkaido-susukino.net/top/girls/girldetail/?girl_id=30454705", type: "soap-q" },
@@ -146,13 +179,18 @@
             { id: 4, name: "CHIAKI", shop: "Pure Lovers (Shop 14208)", url: "https://purelovers-escort.com/zh-hant/shop/14208/girl/2889379/", type: "purelovers" },
             { id: 5, name: "Eimi", shop: "Pure Lovers (Shop 18040)", url: "https://purelovers-escort.com/zh-hant/shop/18040/girl/5026394/", type: "purelovers" },
             { id: 6, name: "kazuha", shop: "Pure Lovers (Shop 18040)", url: "https://purelovers-escort.com/zh-hant/shop/18040/girl/4133996/", type: "purelovers" },
-            { id: 7, name: "Ito", shop: "Pure Lovers (Shop 18040)", url: "https://purelovers-escort.com/zh-hant/shop/18040/girl/4377006/", type: "purelovers" }
+            { id: 7, name: "Ito", shop: "Pure Lovers (Shop 18040)", url: "https://purelovers-escort.com/zh-hant/shop/18040/girl/4377006/", type: "purelovers" },
+            // 新增
+            { id: 8, name: "涼音なな", shop: "夢の扉", url: "https://www.yumeno-tobira.com/profile/?gid=01017", type: "yumenotobira" },
+            { id: 9, name: "時田こよみ", shop: "夢の扉", url: "https://www.yumeno-tobira.com/profile/?gid=01003", type: "yumenotobira" }
         ];
 
         const MAP_LINKS = [
             { name: "salon de M", url: "https://maps.app.goo.gl/MYxKknLTHNFYfMJPA", address: "札幌市薄野周邊" },
             { name: "FANTASY Spa", url: "https://maps.app.goo.gl/PAppCK4vE2V1zyXG7", address: "札幌市薄野周邊" },
-            { name: "Happiness", url: "https://maps.app.goo.gl/2YBzy1wGrG3Nit1G6", address: "札幌市薄野周邊" }
+            { name: "Happiness", url: "https://maps.app.goo.gl/2YBzy1wGrG3Nit1G6", address: "札幌市薄野周邊" },
+            // 新增
+            { name: "夢の扉", url: "https://maps.app.goo.gl/VQUExzgqPP9qRagf7", address: "札幌市薄野周邊" }
         ];
 
         // --- 程式邏輯 ---
@@ -166,6 +204,7 @@
             let html = '';
 
             GIRLS_DATA.forEach(girl => {
+                // 如果不是 soap-q，預設使用粉紅色系 (包含了 purelovers 和 yumenotobira)
                 const colorClass = girl.type === 'soap-q' ? 'bg-gradient-to-br from-purple-400 to-purple-600' : 'bg-gradient-to-br from-pink-400 to-rose-500';
                 
                 html += `
@@ -237,7 +276,7 @@
             document.getElementById('preview-name').textContent = girl.name;
             document.getElementById('preview-shop-header').textContent = girl.shop;
             
-            // 修正: 這裡加上了安全檢查，確保元素存在才賦值，同時我在 HTML 中補回了被刪除的 preview-shop-name
+            // 安全檢查並更新商店名稱顯示
             const shopNameEl = document.getElementById('preview-shop-name');
             if (shopNameEl) {
                 shopNameEl.textContent = girl.shop; 
